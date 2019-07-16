@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+    <meta charset="UTF-8">
+
+    <!-- Application Titles -->
+    <title>Train Scheduler</title>
+
+    <!-- Response Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- jQuery JS Link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS Links -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Firebase Links -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+
+    </head>
+    <!-- Main Body -->
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Train Scheduler</h1>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-12">
+                        <h5>Current Train Schedule</h5>
+                        (Updates every 30 seconds)
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Train Name</th>
+                                <th scope="col">Destination</th>
+                                <th scope="col">Frequency (mins)</th>
+                                <th scope="col">Next Arrival</th>
+                                <th scope="col">Minutes Away</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduled-trains">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>Current Train Schedule</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group">
+                            <label>Train Name</label>
+                            <input id="new-train-name" class="form-control" type="text" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <input id="new-train-destination" class="form-control" type="text" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>First Train Time (HH:MM - Military Time)</label>
+                            <input id="new-train-time" class="form-control" type="text" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency (mins)</label>
+                            <input id="new-train-frequency" class="form-control" type="text" placeholder="">
+                        </div>
+                        <button id="new-train-btn" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Train Scheduler Application JS Link -->
+        <script src="assets/javascript/trains.js"></script>
+
+        <!-- Moment JS Link -->
+        <script src="assets/javascript/moment.js"></script>
+    </body>
+</html>
