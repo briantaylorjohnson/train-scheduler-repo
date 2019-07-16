@@ -14,6 +14,7 @@ $(document).ready(function()
     // Creates a reference to the Firebase database so it can be called easily later in the code
     var database = firebase.database();
     var autoUpdate;
+    var lastUpdated;
 
     // Initializes the variables to populate the train schedule table on load of of the application and when new trains are added
     var trainCount = 0;
@@ -81,6 +82,10 @@ $(document).ready(function()
                         $(trainRow).append(minsAwayCol);
 
                         $("#scheduled-trains").append(trainRow);
+
+                        lastUpdated = moment().format("MM-DD-YYYY hh:mm:ss");
+                        $("#update-time").empty();
+                        $("#update-time").append(lastUpdated);
                     }
                 }
             });
