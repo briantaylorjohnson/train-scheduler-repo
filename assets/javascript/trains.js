@@ -14,6 +14,8 @@ $(document).ready(function()
 
     // Creates a reference to the Firebase database so it can be called easily later in the code
     var database = firebase.database();
+
+    // Initializes global variables related to time tracking -- autoupdate for setInterval and lastUpdated for time stamping
     var autoUpdate;
     var lastUpdated;
 
@@ -93,7 +95,7 @@ $(document).ready(function()
                         var nextArrivalCol = $("<td>"); // Next arrival time cell
                         var minsAwayCol = $("<td>"); // Minutes away cell
 
-                        // Adds the scope attribute of "row" to the train's row HTML
+                        // Adds the scope attribute of "row" to the train's first cell HTML
                         nameCol.attr("scope","row");
                        
                         // Adds the respective data to each cell variable in the train's row
@@ -118,6 +120,27 @@ $(document).ready(function()
                         $("#update-time").empty();
                         $("#update-time").append(lastUpdated);
                     }
+                }
+
+                // Conditional in case new trains exist in the database
+                else
+                {
+                    var noTrainsMsgRow = $("<tr>"); // Row for no trains loaded message
+                    var noTrainsMsgCell = $("<td>"); // No trains loaded message cell
+
+                    // Adds the no trains loaded message to the HTML table cell variable
+                    noTrainsMsgCell.text("There are currently no trains loaded.");
+
+                    // Appends the no trains loaded HTML cell to the HTML table row variable
+                    $(noTrainsMsgRow).append(noTrainsMsgCell);
+
+                    // Appends the no trains loaded message to the Scheduled Trains table in the DOM
+                    $("#scheduled-trains").append(noTrainsMsgRow);
+
+                    // Updates the DOM with the last update time stamp using Moment.js
+                    lastUpdated = moment().format("MM-DD-YYYY hh:mm:ss");
+                    $("#update-time").empty();
+                    $("#update-time").append(lastUpdated);
                 }
             });
     }
@@ -210,8 +233,11 @@ $(document).ready(function()
         // Invokes the addNewTrain function with the user's inputs as arguments/parameters
         addNewTrain(newName, newDestination, newFrequency, newFirstTrainTime);
 
-        // Relaods the train schedule with the new train added
-        loadTrainSchedule();
+        // Clears new train form after adding new train record to Firebase database
+        $("#new-train-name").val("");
+        $("#new-train-destination").val("");
+        $("#new-train-frequency").val("");
+        $("#new-train-time").val("");
     });
 
     
